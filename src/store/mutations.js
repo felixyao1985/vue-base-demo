@@ -4,6 +4,7 @@ const REMBER_TIME = 'REMBER_TIME'
 const INITIALIZE_DATA = 'INITIALIZE_DATA'
 const GET_FLOOR = 'GET_FLOOR'
 const SET_FLOOR = 'SET_FLOOR'
+const GET_BED_DATA = 'GET_BED_DATA'
 export default {
 	//点击进入下一题
 	[ADD_ITEMNUM](state, num) {
@@ -29,10 +30,13 @@ export default {
 		state.allTime = 0;
 		state.answerid = [];
 	},
-  [GET_FLOOR](state) {
-
+  [GET_FLOOR](state,res) {
+    state.floorData = res;
   },
   [SET_FLOOR](state,id) {
     state.floorId = id;
+  },
+  [GET_BED_DATA](state,res) {
+    state.bedData = res.domainInfoList;
   },
 }

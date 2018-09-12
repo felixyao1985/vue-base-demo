@@ -24,9 +24,9 @@
       }
     },
     props:['fatherComponent'],
-    computed: mapState([
-      'floorData','floorId'
-    ]),
+    computed:mapState([
+        'floorData','floorId'
+      ]),
     methods: {
       ...mapActions([
         'getFloor','setFloor'
@@ -35,12 +35,35 @@
         this.setFloor(id);
       }
     },
+    beforeCreate(){
+
+    },
     created(){
       this.getFloor();
+    },
+    beforeMount: function() {
+      //this.selfloorId = this.floorData[0].id;
     },
     mounted(){
       this.selfloorId = this.floorData[0].id;
       this.setFloor(this.selfloorId);
+    },
+    beforeUpdate: function () {
+
+    },
+    beforeUpdate: function () {
+
+    },
+    updated: function () {
+      //this.selfloorId = this.floorData[0].id;
+    },
+    watch:{
+      floorData: function(ov,nv){
+        console.log('floorData更新');
+        this.selfloorId = this.floorData[0].id;
+        this.setFloor(this.selfloorId);
+
+      }
     }
   }
 </script>

@@ -4,9 +4,17 @@
       <div class="home_logo item_container_style">
         楼层ID
         {{floorId}}
-        数据
-        {{bedData}}
       </div>
+      <section class="">
+        <ul>
+          <li v-for="(item, index) in bedData" :key="index" class="category_left_li"  @click="showCard(item.id, item.displayName)">
+            <section>
+              <span>{{item.displayName}}</span>
+            </section>
+
+          </li>
+        </ul>
+      </section>
     </div>
 
   </section>
@@ -19,38 +27,43 @@
     data() {
       return {
         id: null,
-        bedData:null
+        _floorId:0
       }
     },
     props:['fatherComponent'],
     computed: mapState([
-      'floorId'
+      'floorId','bedData'
     ]),
     methods: {
       ...mapActions([
-        'getFloor'
-      ])
+        'getBedData'
+      ]),
+      showCard(id,name){
+        console.log(name)
+      }
     },
     created(){
       console.log('------created创建完毕状态------');
-      this.bedData = this.floorId;
-      console.log("bedData",this.bedData);
+      this._floorId = this.floorId;
+      this.getBedData(this.floorId);
+      //console.log("bedData",this.bedData);
     },
     mounted(){
       console.log('------mounted 挂载结束状态------');
-      console.log("bedData",this.bedData);
+      //console.log("bedData",this.bedData);
     },
     beforeUpdate: function () {
       console.log('beforeUpdate 更新前状态===============》');
-      console.log(this.floorId);
-      this.bedData = this.floorId;
-      console.log("bedData",this.bedData);
+      if(this._floorId != this.floorId){
+        this._floorId = this.floorId;
+        this.getBedData(this.floorId);
+      }
+
+      //console.log("bedData",this.bedData);
     },
     updated: function () {
       console.log('updated 更新完成状态===============》');
-      console.log(this.floorId);
-      this.bedData = this.floorId;
-      console.log("bedData",this.bedData);
+      //console.log("bedData",this.bedData);
     }
   }
 </script>
